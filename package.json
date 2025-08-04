@@ -1,0 +1,21 @@
+{
+  "name": "my-express-app",
+  "version": "1.0.0",
+  "description": "Todo API Server với Express.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node test-api.js"
+  },
+  "keywords": ["todo", "api", "express", "rest"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
