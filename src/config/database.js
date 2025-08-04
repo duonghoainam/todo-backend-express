@@ -1,40 +1,58 @@
-// Cấu hình database
-// Hiện tại sử dụng in-memory storage
-// Có thể mở rộng để kết nối MongoDB, PostgreSQL, etc.
+const mongoose = require("mongoose");
 
+// Cấu hình MongoDB
 const config = {
-  // In-memory storage cho development
-  storage: {
-    type: "memory",
-    todos: [
-      {
-        id: 1,
-        title: "Học Express.js",
-        description: "Tìm hiểu về Express.js framework",
-        completed: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        title: "Tạo API Todo",
-        description: "Xây dựng RESTful API cho todo app",
-        completed: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ],
-    nextId: 3,
+  // MongoDB connection string
+  mongoURI:
+    process.env.MONGO_URI ||
+    "mongodb+srv://admin:1234567890Aa@cluster89670.masbwtn.mongodb.net/todos",
+
+  // MongoDB options
+  mongoOptions: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
   },
 
-  // Cấu hình cho database thực (có thể sử dụng sau)
+  // Database name
+  dbName: "todos",
+
+  // Cấu hình cho database thực
   database: {
-    host: process.env.DB_HOST || "localhost",
+    host: process.env.DB_HOST || "cluster89670.masbwtn.mongodb.net",
     port: process.env.DB_PORT || 27017,
-    name: process.env.DB_NAME || "todo_app",
-    user: process.env.DB_USER || "",
-    password: process.env.DB_PASSWORD || "",
+    name: process.env.DB_NAME || "todos",
+    user: process.env.DB_USER || "admin",
+    password: process.env.DB_PASSWORD || "1234567890Aa",
   },
 };
 
-module.exports = config;
+// Kết nối MongoDB
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(config.mongoURI, config.mongoOptions);
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    return conn;
+  } catch (error) {
+    console.error(`❌ MongoDB connection error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+// Ngắt kết nối MongoDB
+const disconnectDB = async () => {
+  try {
+    await mongoose.disconnect();
+    console.log("✅ MongoDB Disconnected");
+  } catch (error) {
+    console.error(`❌ MongoDB disconnection error: ${error.message}`);
+  }
+};
+
+module.exports = {
+  config,
+  connectDB,
+  disconnectDB,
+};

@@ -22,17 +22,58 @@ app.use(`${appConfig.api.prefix}/todos`, todoRoutes);
 // Route mặc định
 app.get("/", (req, res) => {
   res.json({
-    message: "Todo API Server",
+    message: "Todo API Server với MongoDB",
     version: appConfig.api.version,
+    database: "MongoDB",
     endpoints: {
-      "GET /api/todos": "Lấy tất cả todos",
-      "GET /api/todos/stats": "Thống kê todos",
-      "GET /api/todos/:id": "Lấy todo theo ID",
-      "POST /api/todos": "Tạo todo mới",
-      "PUT /api/todos/:id": "Cập nhật todo",
-      "PATCH /api/todos/:id/toggle": "Toggle trạng thái completed",
-      "DELETE /api/todos/:id": "Xóa todo",
-      "DELETE /api/todos": "Xóa tất cả todos",
+      "📋 Todo Items API": {
+        "GET /api/todos": "Lấy tất cả todo items",
+        "GET /api/todos/:id": "Lấy todo item theo ID",
+        "POST /api/todos": "Tạo todo item mới",
+        "PUT /api/todos/:id": "Cập nhật todo item",
+        "PATCH /api/todos/:id/toggle": "Toggle trạng thái todo item",
+        "DELETE /api/todos/:id": "Xóa todo item",
+        "DELETE /api/todos": "Xóa tất cả todo items",
+        "GET /api/todos/stats": "Thống kê todo items",
+      },
+      "📋 Todo Lists API": {
+        "GET /api/todos/lists": "Lấy tất cả todo lists",
+        "POST /api/todos/lists": "Tạo todo list mới",
+      },
+      "🔍 Query Parameters": {
+        "?status=todo": "Filter theo trạng thái (todo/in-progress/finish)",
+        "?todo_group_id=id": "Filter theo todo list",
+        "?search=keyword": "Tìm kiếm theo name hoặc description",
+        "?user_id=id": "Filter todo lists theo user",
+      },
+      "📊 Features": {
+        "Virtual Fields": "isOverdue, timeRemaining, priority",
+        "Populated References": "todo_group_id, user_id",
+        "Text Search": "MongoDB text indexes",
+        "Advanced Filtering": "Multiple conditions",
+      },
+    },
+    examples: {
+      "Create Todo": {
+        method: "POST",
+        url: "/api/todos",
+        body: {
+          name: "Học Node.js",
+          des: "Tìm hiểu về Express.js và MongoDB",
+          todo_group_id: "507f1f77bcf86cd799439012",
+          due_at: "2024-01-20T18:00:00.000Z",
+          status: "todo",
+        },
+      },
+      "Create Todo List": {
+        method: "POST",
+        url: "/api/todos/lists",
+        body: {
+          name: "Dự án web",
+          user_id: "507f1f77bcf86cd799439010",
+          status: "unfinished",
+        },
+      },
     },
   });
 });

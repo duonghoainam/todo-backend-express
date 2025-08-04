@@ -9,11 +9,15 @@ class TodoController {
   // Lấy tất cả todos
   async getAllTodos(req, res) {
     try {
-      const { completed, search } = req.query;
+      const { status, todo_group_id, search } = req.query;
       const filters = {};
 
-      if (completed !== undefined) {
-        filters.completed = completed === "true";
+      if (status) {
+        filters.status = status;
+      }
+
+      if (todo_group_id) {
+        filters.todo_group_id = todo_group_id;
       }
 
       if (search) {
@@ -121,6 +125,32 @@ class TodoController {
     try {
       const result = await this.todoService.getTodoStats();
       res.json(result);
+    } catch (error) {
+      res.status(500).json(createErrorResponse("Lỗi server: " + error.message));
+    }
+  }
+
+  // Lấy tất cả todo lists
+  async getAllTodoLists(req, res) {
+    try {
+      const { user_id } = req.query;
+      const result = await this.todoService.getAllTodoLists(user_id);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json(createErrorResponse("Lỗi server: " + error.message));
+    }
+  }
+
+  // Tạo todo list mới
+  async createTodoList(req, res) {
+    try {
+      const result = await this.todoService.createTodoList(req.body);
+
+      if (!result.success) {
+        return res.status(400).json(result);
+      }
+
+      res.status(201).json(result);
     } catch (error) {
       res.status(500).json(createErrorResponse("Lỗi server: " + error.message));
     }

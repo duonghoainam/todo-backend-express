@@ -55,4 +55,11 @@ router.delete(
 // DELETE /api/todos - Xóa tất cả todos
 router.delete("/", todoController.deleteAllTodos.bind(todoController));
 
+// Todo Lists routes
+// GET /api/todos/lists - Lấy tất cả todo lists
+router.get("/lists", todoController.getAllTodoLists.bind(todoController));
+
+// POST /api/todos/lists - Tạo todo list mới
+router.post("/lists", todoController.createTodoList.bind(todoController));
+
 module.exports = router;
