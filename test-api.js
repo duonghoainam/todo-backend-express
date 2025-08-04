@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:3000/api";
 
 // Helper function để test API
 async function testAPI() {
-  console.log("🧪 Bắt đầu test Todo API...\n");
+  console.log("🧪 Bắt đầu test Todo API (MVC Architecture)...\n");
 
   try {
     // 1. Test lấy tất cả todos
@@ -28,8 +28,8 @@ async function testAPI() {
     // 2. Test tạo todo mới
     console.log("2️⃣ Test POST /api/todos");
     const newTodo = {
-      title: "Test Todo từ API",
-      description: "Đây là todo được tạo từ test script",
+      title: "Test Todo từ API (MVC)",
+      description: "Đây là todo được tạo từ test script với cấu trúc MVC",
     };
     const createResponse = await axios.post(`${BASE_URL}/todos`, newTodo);
     console.log("✅ Tạo todo thành công:", createResponse.data.data.title);
@@ -46,8 +46,8 @@ async function testAPI() {
     // 4. Test cập nhật todo
     console.log("4️⃣ Test PUT /api/todos/:id");
     const updateData = {
-      title: "Todo đã được cập nhật",
-      description: "Mô tả mới cho todo",
+      title: "Todo đã được cập nhật (MVC)",
+      description: "Mô tả mới cho todo với cấu trúc MVC",
       completed: true,
     };
     const updateResponse = await axios.put(
@@ -72,8 +72,8 @@ async function testAPI() {
     const filterResponse = await axios.get(`${BASE_URL}/todos?completed=false`);
     console.log("✅ Todos chưa hoàn thành:", filterResponse.data.data.length);
 
-    const searchResponse = await axios.get(`${BASE_URL}/todos?search=test`);
-    console.log('✅ Todos có từ khóa "test":', searchResponse.data.data.length);
+    const searchResponse = await axios.get(`${BASE_URL}/todos?search=mvc`);
+    console.log('✅ Todos có từ khóa "mvc":', searchResponse.data.data.length);
     console.log("");
 
     // 7. Test thống kê (trước khi xóa todo)
@@ -115,6 +115,7 @@ async function testAPI() {
     console.log("");
 
     console.log("🎉 Tất cả tests đã hoàn thành thành công!");
+    console.log("🏗️  Cấu trúc MVC hoạt động hoàn hảo!");
   } catch (error) {
     console.error(
       "❌ Lỗi trong quá trình test:",

@@ -1,14 +1,14 @@
 {
   "name": "my-express-app",
   "version": "1.0.0",
-  "description": "Todo API Server với Express.js",
-  "main": "index.js",
+  "description": "Todo API Server với Express.js - MVC Architecture",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
     "test": "node test-api.js"
   },
-  "keywords": ["todo", "api", "express", "rest"],
+  "keywords": ["todo", "api", "express", "rest", "mvc"],
   "author": "",
   "license": "ISC",
   "dependencies": {
