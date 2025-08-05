@@ -1,11 +1,13 @@
 const express = require("express");
 const appConfig = require("./config/app");
 const todoRoutes = require("./routes/todoRoutes");
+const cors = require("cors");
+
 const {
   errorHandler,
   notFoundHandler,
   requestLogger,
-  corsHandler,
+  // corsHandler,
 } = require("./middlewares/errorHandler");
 
 const app = express();
@@ -13,7 +15,13 @@ const app = express();
 // Middleware cơ bản
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(corsHandler);
+// app.use(corsHandler);
+app.use(
+  cors({
+    origin: "*", // hoặc thay bằng domain frontend của bạn
+    credentials: true,
+  })
+);
 app.use(requestLogger);
 
 // Routes

@@ -60,5 +60,5 @@ module.exports = {
   errorHandler,
   notFoundHandler,
   requestLogger,
-  corsHandler,
+  // corsHandler,
 };

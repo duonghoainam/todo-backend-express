@@ -9,12 +9,20 @@
     "test": "node test-api.js",
     "seed": "node src/utils/seedData.js"
   },
-  "keywords": ["todo", "api", "express", "rest", "mvc", "mongodb"],
+  "keywords": [
+    "todo",
+    "api",
+    "express",
+    "rest",
+    "mvc",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0",
     "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "mongoose": "^8.0.0"
   },
   "devDependencies": {
